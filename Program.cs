@@ -5,11 +5,25 @@ WordsSet.Add("yes");
 WordsSet.Add("has");
 WordsSet.Add("then");
 WordsSet.Add("the");
+WordsSet.Add("and");
+WordsSet.Add("was");
+WordsSet.Add("were");
+WordsSet.Add("them");
+WordsSet.Add("that");
+WordsSet.Add("they");
+WordsSet.Add("the");
+WordsSet.Add("had");
+WordsSet.Add("his");
+WordsSet.Add("not");
+WordsSet.Add("been");
+WordsSet.Add("for");
+WordsSet.Add("their");
+WordsSet.Add("this");
+WordsSet.Add("there");
+WordsSet.Add("which");
 var CharArray = txt.Where(x => x != '.' && x != ',' && x != ':' && x != ';' && x != '?' && x != '"' && x != '-' && x != '!' && x!= '\r').ToArray();
 string book = new string(CharArray);
-//var WordsList = book.Split(' ', '\n').Where(x =>  x.Length > 2 && x.ToLower() != "was" && x.ToLower() != "were" && x.ToLower() != "yes" && x.ToLower() != "the" && x.ToLower() != "and" && x.ToLower()  != "not" && x.ToLower() != "had"  && x.ToLower() != "that"
-//&& x.ToLower() != "them" && x.ToLower() != "their").GroupBy(x => x);
-var WordsList = book.Split(' ', '\n').Where(x=> WordsSet.All(z=> x.ToLower() != z.ToLower()) && x.Length > 2).GroupBy((x) => x);
+var WordsList = book.Split(' ', '\n').Where(x=> !WordsSet.Contains(x.ToLower()) && x.Length > 2).GroupBy((x) => x);
 var TopWords = WordsList.OrderByDescending(x => x.Count()).Select(x => new { Word = x.ElementAt(0), Length = x.Count()}).Take(10);
 foreach (var wordList in TopWords)
 {
